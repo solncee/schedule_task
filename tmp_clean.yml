@@ -1,0 +1,15 @@
+---   #Cron file to clean tmp
+- hosts: all 
+  connection: ssh
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  tasks:
+    - name: Clean up remote  /tmp folder
+      cron:
+        name: Clean remote folder
+        weekday: 0
+        hour: 23
+        minute: 59
+        job: "rm -rf /tmp/*"
+        state: present
